@@ -1,0 +1,17 @@
+{
+		"version": "1.0.0",
+		"author": {"name":"Reyemb","email":"info@reyemb.io"},
+		"resources": [
+			{
+				"resourceId": "rId0",
+				"sourceType": 5,
+				"file": "resources/PowerBI_Histogram.pbiviz.json"
+			}
+		],
+		"visual": {"name":"Histogram","displayName":"Histogram","guid":"PowerBI_Histogram","visualClassName":"Visual","version":"1.0.0","description":"Histogram for PowerBI","supportUrl":"https://google.com","gitHubUrl":""},
+		"metadata": {
+			"pbivizjson": {
+				"resourceId": "rId0"
+			}
+		}
+	}

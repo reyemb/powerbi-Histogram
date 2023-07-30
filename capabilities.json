@@ -1,0 +1,255 @@
+{
+  "supportsHighlight": true,
+  "supportsMultiVisualSelection": true,
+  "suppressDefaultTitle": false,
+  "privileges": [],
+  "tooltips": {
+    "supportedTypes": {
+      "default": true,
+      "canvas": true
+    },
+    "roles": ["tooltips"]
+  },
+  "dataRoles": [
+    {
+      "name": "Values",
+      "kind": "Grouping",
+      "displayName": "Values",
+      "displayNameKey": "Visual_Values"
+    }
+  ],
+  "objects": {
+    "general": {
+      "displayName": "General",
+      "displayNameKey": "formattingGeneral",
+      "properties": {
+        "selection": {
+          "displayName": "Selection",
+          "type": {
+            "text": true
+          }
+        },
+        "fontSize": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "fontColor": {
+          "displayName": "Font Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "numberOfDecimalPlaces": {
+          "displayName": "Number of Decimals Places",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "bins": {
+      "displayName": "Bins",
+      "properties": {
+        "binColour": {
+          "displayName": "Bin Colour",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "binCount": {
+          "displayName": "Bin Count",
+          "type": {
+            "numeric": true
+          }
+        },
+        "useBinSize": {
+          "displayName": "Use Bin Size",
+          "type": {
+            "bool": true
+          }
+        },
+        "binSize": {
+          "displayName": "Bin Size",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "Margin": {
+      "displayName": "Margin",
+      "properties": {
+        "topMargin": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "bottomMargin": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "leftMargin": {
+          "type": {
+            "numeric": true
+          }
+        },
+        "rightMargin": {
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    },
+    "Stats": {
+      "displayName": "Statistics",
+      "properties": {
+        "showMedian": {
+          "displayName": "Show Median",
+          "type": {
+            "bool": true
+          }
+        },
+        "drawMedian": {
+          "displayName": "Draw Median",
+          "type": {
+            "bool": true
+          }
+        },
+        "medianColor": {
+          "displayName": "Median Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "medianLineWidth": {
+          "displayName": "Median Line Width",
+          "type": {
+            "numeric": true
+          }
+        },
+        "showMean": {
+          "displayName": "Show Mean",
+          "type": {
+            "bool": true
+          }
+        },
+        "drawMean": {
+          "displayName": "Draw Mean",
+          "type": {
+            "bool": true
+          }
+        },
+        "meanColor": {
+          "displayName": "Mean Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "meanLineWidth": {
+          "displayName": "Mean Line Width",
+          "type": {
+            "numeric": true
+          }
+        },
+        "showStd": {
+          "displayName": "Show Std",
+          "type": {
+            "bool": true
+          }
+        },
+        "drawStd": {
+          "displayName": "Draw Std",
+          "type": {
+            "bool": true
+          }
+        },
+        "stdColor": {
+          "displayName": "Std Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "stdLineWidth": {
+          "displayName": "Std Line Width",
+          "type": {
+            "numeric": true
+          }
+        },
+        "showVariance": {
+          "displayName": "Show Variance",
+          "type": {
+            "bool": true
+          }
+        },
+        "drawVariance": {
+          "displayName": "Draw Variance",
+          "type": {
+            "bool": true
+          }
+        },
+        "varianceColor": {
+          "displayName": "Variance Color",
+          "type": {
+            "fill": {
+              "solid": {
+                "color": true
+              }
+            }
+          }
+        },
+        "varianceLineWidth": {
+          "displayName": "Variance Line Width",
+          "type": {
+            "numeric": true
+          }
+        }
+      }
+    }
+  },
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "Values": {
+            "min": 1,
+            "max": 1
+          }
+        }
+      ],
+      "categorical": {
+        "categories": {
+          "bind": {
+            "to": "Values"
+          },
+          "dataReductionAlgorithm": {
+            "top": {
+              "count": 1000000
+            }
+          }
+        }
+      }
+    }
+  ]
+}
