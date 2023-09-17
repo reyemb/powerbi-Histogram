@@ -21,6 +21,8 @@ One specific issue encountered was that creating formatting groups is not possib
 
 To evaluate the capabilities of this custom visual, check out the video file at `/demo/demo.mp4`.
 
+https://github.com/reyemb/powerbi-Histogram/assets/60140509/36cb3a85-9630-4827-90b3-69beea628570
+
 ## Changelog
 
 Version 1.0 - Initial Commit
@@ -44,6 +46,8 @@ Enable Drillthrough
 ## Usage
 
 To see how the visual can be used, check out the video file at `/demo/usage.mp4`.
+
+https://github.com/reyemb/powerbi-Histogram/assets/60140509/2ec07e5b-b401-4069-aaa6-2328d9cf7451
 
 ## Development
 
