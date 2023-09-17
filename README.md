@@ -4,6 +4,13 @@ This repository was created to address the need for updated custom visuals in Po
 
 One specific issue encountered was that creating formatting groups is not possible with the formatting model utils, despite this being the recommended approach by Microsoft. To address this, I integrated a solution from [this pull request](https://github.com/microsoft/powerbi-visuals-utils-formattingmodel/pull/7) into my custom visual. Thanks to liprec, it is now possible to use the formatting model utils with groups as intended. You can find more information on this [here](https://learn.microsoft.com/en-us/power-bi/developer/visuals/format-pane).
 
+## Changelog
+
+05.09.2023
+   - Added Field so that vertical lines based on Input can be drawn
+   - Added Custom Settings to adjust coloring, width and linestyle of the vertical line
+   - Also Added show label options (JSON and true to all or false to all)
+   
 ## Features
 
 - Crossfiltering

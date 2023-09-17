@@ -26,13 +26,8 @@
 
 "use strict";
 
-import { formattingSettings } from "./utils/formattingmodels/index";
-
-import FormattingSettingsCard = formattingSettings.Card;
-import FormattingSettingsSlice = formattingSettings.Slice;
-import FormattingSettingsModel = formattingSettings.Model;
-import FormattingSettingsGroup = formattingSettings.Group;
-import { SimpleCard } from "./utils/formattingmodels/FormattingSettingsComponents";
+import { format } from "d3-format";
+import { formattingSettings } from "powerbi-visuals-utils-formattingmodel-community";
 
 /**
  * Histogram Visual Settings
@@ -60,7 +55,7 @@ export class GeneralSettings extends formattingSettings.SimpleCard {
     name: string = "general";
     displayNameKey: string = "GeneralKey";
     descriptionKey: string = "GeneralDescriptionKey";
-    slices: Array<FormattingSettingsSlice> = [this.fontSize, this.fontColor, this.numberOfDecimalPlaces];
+    slices = [this.fontSize, this.fontColor, this.numberOfDecimalPlaces];
 }
 
 /**
@@ -108,7 +103,7 @@ export class BinSettings extends formattingSettings.SimpleCard {
  * Histocram Analysis Settings
  */
 
-export class ShowMedianSettings extends FormattingSettingsGroup {
+export class ShowMedianSettings extends formattingSettings.Group {
     public showMedian = new formattingSettings.ToggleSwitch({
         name: "showMedian",
         displayNameKey: "ShowMedianKey",
@@ -123,7 +118,7 @@ export class ShowMedianSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.showMedian];
 }
 
-export class DrawMedianSettings extends FormattingSettingsGroup {
+export class DrawMedianSettings extends formattingSettings.Group {
     public drawMedian = new formattingSettings.ToggleSwitch({
         name: "drawMedian",
         displayNameKey: "DrawMedianKey",
@@ -150,7 +145,7 @@ export class DrawMedianSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.drawMedian, this.medianColor, this.medianLineWidth];
 } 
 
-export class ShowMeanSettings extends FormattingSettingsGroup {
+export class ShowMeanSettings extends formattingSettings.Group {
     public showMean = new formattingSettings.ToggleSwitch({
         name: "showMean",
         displayNameKey: "ShowMeanKey",
@@ -164,7 +159,7 @@ export class ShowMeanSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.showMean];
 }
 
-export class DrawMeanSettings extends FormattingSettingsGroup {
+export class DrawMeanSettings extends formattingSettings.Group {
     public drawMean = new formattingSettings.ToggleSwitch({
         name: "drawMean",
         displayNameKey: "DrawMeanKey",
@@ -190,7 +185,7 @@ export class DrawMeanSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.drawMean, this.meanColor, this.meanLineWidth];
 }
 
-export class ShowStdSettings extends FormattingSettingsGroup {
+export class ShowStdSettings extends formattingSettings.Group {
     public showStd = new formattingSettings.ToggleSwitch({
         name: "showStd",
         displayNameKey: "ShowStdKey",
@@ -204,7 +199,7 @@ export class ShowStdSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.showStd];
 }
 
-export class DrawStdSettings extends FormattingSettingsGroup {
+export class DrawStdSettings extends formattingSettings.Group {
     public drawStd = new formattingSettings.ToggleSwitch({
         name: "drawStd",
         displayNameKey: "DrawStdKey",
@@ -230,7 +225,7 @@ export class DrawStdSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.drawStd, this.stdColor, this.stdLineWidth];
 }
 
-export class ShowVarianceSettings extends FormattingSettingsGroup {
+export class ShowVarianceSettings extends formattingSettings.Group {
     public showVariance = new formattingSettings.ToggleSwitch({
         name: "showVariance",
         displayNameKey: "ShowVarianceKey",
@@ -244,7 +239,7 @@ export class ShowVarianceSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.showVariance];
 }
 
-export class DrawVarianceSettings extends FormattingSettingsGroup {
+export class DrawVarianceSettings extends formattingSettings.Group {
     public drawVariance = new formattingSettings.ToggleSwitch({
         name: "drawVariance",
         displayNameKey: "DrawVarianceKey",
@@ -270,7 +265,7 @@ export class DrawVarianceSettings extends FormattingSettingsGroup {
     slices: Array<formattingSettings.Slice> = [this.drawVariance, this.varianceColor, this.varianceLineWidth];
 }
 
-export class MarginSettings extends SimpleCard {
+export class MarginSettings extends formattingSettings.SimpleCard {
     public leftMargin = new formattingSettings.NumUpDown({
         name: "leftMargin",
         displayNameKey: "LeftMarginKey",
@@ -324,7 +319,7 @@ export class StatsSettings extends formattingSettings.CompositeCard {
     ]
 }
 
-export class VisualFormattingSettingsModel extends FormattingSettingsModel {
+export class VisualFormattingSettingsModel extends formattingSettings.Model {
     displayNameKey: string = "FormattingKey";
     discriptionKey: string = "FormattingDescriptionKey";
     public generalSettings: GeneralSettings = new GeneralSettings();
@@ -332,7 +327,7 @@ export class VisualFormattingSettingsModel extends FormattingSettingsModel {
     public statsSettings: StatsSettings = new StatsSettings();
     public binSettings: BinSettings = new BinSettings();
 
-    public cards: FormattingSettingsCard[] = [
+    public cards = [
         this.generalSettings,
         this.marginSettings,
         this.statsSettings,

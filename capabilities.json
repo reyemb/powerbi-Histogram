@@ -16,6 +16,12 @@
       "kind": "Grouping",
       "displayName": "Values",
       "displayNameKey": "Visual_Values"
+    },
+    {
+      "name": "VerticalLines",
+      "kind": "GroupingOrMeasure",
+      "displayName": "Vertical Lines",
+      "displayNameKey": "VerticalLinesKey"
     }
   ],
   "objects": {
@@ -238,16 +244,25 @@
           }
         }
       ],
-      "categorical": {
-        "categories": {
-          "bind": {
-            "to": "Values"
-          },
-          "dataReductionAlgorithm": {
-            "top": {
-              "count": 1000000
+      "table": {
+        "rows": {
+            "select": [
+                {
+                    "for": {
+                        "in": "Values"
+                    }
+                },
+                {
+                    "for": {
+                        "in": "VerticalLines"
+                    }
+                }
+            ],
+        "dataReductionAlgorithm": {
+              "window": {
+                "count": 30000
+              } 
             }
-          }
         }
       }
     }

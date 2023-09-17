@@ -7,8 +7,7 @@ export class HistogramBehavior extends baseBehavior.BaseBehavior<VisualDataPoint
   protected options: HistogramBehaviorOptions<VisualDataPoint>;
   protected selectionHandler: ISelectionHandler;
   protected bindClick() {
-    const { bars, elementsSelection } = this.options;
-
+    const { bars, elementsSelection, verticalLines, dataPoints} = this.options;
     bars.on("click", (event, data) => {
       const mouseEvent: MouseEvent = event as MouseEvent;
       const statusSelected = !data.selected;
@@ -24,8 +23,23 @@ export class HistogramBehavior extends baseBehavior.BaseBehavior<VisualDataPoint
         this.selectionHandler.handleSelection(datapoints, isCtrlPressed);
       }
       event.stopPropagation();
+    })
+    verticalLines.on("click", (event, data) => {
+      console.log(data.value)
+      let datapoints_selected;
+      if (data.type=='smallerEQ') {
+        datapoints_selected = dataPoints.filter(d => d.value <= data.value)
+        data.type = 'largerEQ'
+      } else {
+        datapoints_selected = dataPoints.filter(d => d.value >= data.value)
+        data.type = 'smallerEQ'
+      }
+      console.log()
+      this.selectionHandler.handleSelection(datapoints_selected, false);
+      event.stopPropagation();
+    
     });
-  }
+  };
   protected bindContextMenu() {
     const { elementsSelection } = this.options;
     elementsSelection.on("contextmenu", (event, data: VisualDataPoint) => {

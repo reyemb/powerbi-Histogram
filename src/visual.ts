@@ -3,7 +3,7 @@
 import powerbi from "powerbi-visuals-api";
 
 // custom imports
-import { FormattingSettingsService } from "./utils/formattingmodels/index";
+import { FormattingSettingsService } from "powerbi-visuals-utils-formattingmodel-community";
 import { PreparedData, VisualDataPoint } from './interfaces';
 import { DrawHistogram } from './draw';
 import { prepareData } from './dataPreparation';
@@ -62,6 +62,7 @@ export class Visual implements IVisual {
 
     public update(options: powerbi.extensibility.visual.VisualUpdateOptions): void {
         this.reset();
+        console.log('Visual update', options);
         // Get the settings from the DataView
         this.formattingSettings = this.formattingSettingsService.populateFormattingSettingsModel(
             VisualFormattingSettingsModel,
@@ -77,6 +78,7 @@ export class Visual implements IVisual {
         this.drawHistogram.init(options, this.formattingSettings, this.formatterFloat, this.formatterInt);            
         this.drawHistogram.createAxes(data);
         
+        
 
         const binColor = this.formattingSettings.binSettings.binColour.value.value;
         // if usebinsize is true, use the binsize, else use the number of bins
@@ -89,7 +91,9 @@ export class Visual implements IVisual {
         }
 
         const stats = calculateStats(data);     
-        
+        const verticalFieldIndexes = options.dataViews[0].table.columns.map((column, index) => column.roles['VerticalLines'] ? index : -1).filter(index => index !== -1);
+        this.drawHistogram.drawVerticalLines(verticalFieldIndexes, options.dataViews[0].table.rows);
+
         addLegend(stats, this.formattingSettings.statsSettings, this.drawHistogram.width, this.formatterFloat, this.drawHistogram.svg);
         drawStatLines(stats, this.formattingSettings.statsSettings, this.drawHistogram);    
         addTooltip(this.drawHistogram.bars, this.host, this.localizationManager, this.formatterFloat, this.formatterInt);
@@ -101,7 +105,8 @@ export class Visual implements IVisual {
                 target: this.drawHistogram.target,
                 elementsSelection: this.drawHistogram.bars,
                 bars: this.drawHistogram.bars,
-                interactivityService: this.interactivityService
+                interactivityService: this.interactivityService,
+                verticalLines: this.drawHistogram.svg.selectAll(".vertical-line")
             });
 
         this.interactivityService.applySelectionStateToData(datapoints);

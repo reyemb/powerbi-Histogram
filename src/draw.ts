@@ -91,16 +91,36 @@ export class DrawHistogram {
             .attr("height", (d) => `${this.height - this.y(d.datapoints.length)}`)
             .style("fill", binColor);        
     }
-    drawLine(value: number, color: string, lineWidth: string): void {
-        this.svg.append("line")
-            .attr("x1", this.x(value))
-            .attr("x2", this.x(value))
-            .attr("y1", 0)
-            .attr("y2", this.height)
-            .style("stroke", color)
-            .style("stroke-width", lineWidth)
-            .style("stroke-dasharray", "5,5")
-            .raise();
+    drawVerticalLines(verticalFieldIndexes: number[], data): void {
+        for (let index of verticalFieldIndexes) {
+            const value = data[0][index];
+            // Add constant color and line width
+            const color = "red";
+            const lineWidth = "4px"
+            this.drawLine(value, color, lineWidth);
+        }
     }
-}
+    
+    /**
+     * Draws a vertical line on the SVG.
+     * @param {number} value - The x-axis value where the line should be drawn.
+     * @param {string} color - The color of the line.
+     * @param {string} lineWidth - The width of the line.
+     */
+    drawLine(value: number, color: string, lineWidth: string): void {
+        const data = [{ value: value, type: "smallerEQ" }];
+        this.svg.append("line")
+        .data(data)  
+        .attr("class", "vertical-line")
+        .attr("x1", d => this.x(d.value))
+        .attr("x2", d => this.x(d.value))
+        .attr("y1", 0)
+        .attr("y2", this.height)
+        .style("stroke", color)
+        .style("stroke-width", lineWidth)
+        .style("stroke-dasharray", "5,5")
+        .raise();
+    }
+    }  
+    
 

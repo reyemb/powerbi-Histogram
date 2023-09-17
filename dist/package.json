@@ -1,5 +1,5 @@
 {
-		"version": "1.0.0",
+		"version": "1.0.1",
 		"author": {"name":"Reyemb","email":"info@reyemb.io"},
 		"resources": [
 			{
@@ -8,7 +8,7 @@
 				"file": "resources/PowerBI_Histogram.pbiviz.json"
 			}
 		],
-		"visual": {"name":"Histogram","displayName":"Histogram","guid":"PowerBI_Histogram","visualClassName":"Visual","version":"1.0.0","description":"Histogram for PowerBI","supportUrl":"https://google.com","gitHubUrl":""},
+		"visual": {"name":"Histogram","displayName":"Histogram","guid":"PowerBI_Histogram","visualClassName":"Visual","version":"1.0.1","description":"Histogram for PowerBI","supportUrl":"https://google.com","gitHubUrl":""},
 		"metadata": {
 			"pbivizjson": {
 				"resourceId": "rId0"

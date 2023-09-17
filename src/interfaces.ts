@@ -7,6 +7,11 @@ export interface BinObject extends d3.Bin<number, number>  {
     datapoints: VisualDataPoint[];
     selected: boolean;
 }
+export interface VerticalLinesData extends BaseDataPoint {
+    value: number;
+    type: string;
+}
+
 export interface PreparedData {
     // category: powerbi.DataViewCategoryColumn;
     datapoints: VisualDataPoint[];
@@ -19,12 +24,14 @@ export interface Stats {
     variance: number | null;
 }
 export interface VisualDataPoint extends interactivitySelectionService.SelectableDataPoint {
-    value: powerbi.PrimitiveValue;
+    value: number;
 }
+
 export interface HistogramBehaviorOptions<SelectableDataPointType extends BaseDataPoint> extends IBehaviorOptions<SelectableDataPointType>{
     elementsSelection: Selection<any, SelectableDataPointType, any, any>;
     bars: Selection<BaseType, BinObject, BaseType, BinObject>;
     clearCatcherSelection: d3.Selection<any, any, any, any>;
+    verticalLines: Selection<BaseType, VerticalLinesData, BaseType, BinObject>;
 }
 export interface Translations {
     [key: string]: {
