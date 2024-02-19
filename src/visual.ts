@@ -95,6 +95,7 @@ export class Visual implements IVisual {
         drawStatLines(stats, this.formattingSettings.statsSettings, this.drawHistogram);    
         addTooltip(this.drawHistogram.bars, this.host, this.localizationManager, this.formatterFloat, this.formatterInt);
 
+
         this.interactivityService.bind(<BaseBehaviorOptions<VisualDataPoint>>{
                 behavior: this.behavior,
                 dataPoints: datapoints,

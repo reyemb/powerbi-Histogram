@@ -47,6 +47,9 @@ export class DrawHistogram {
     }
 
     createAxes(data: any): void {   
+        console.log(data)
+        console.log(findNestedMin(data))
+        console.log(findNestedMax(data))
         this.x = d3.scaleLinear()
             .domain([findNestedMin(data), findNestedMax(data)])
             .range([0, this.width]);
@@ -133,27 +136,28 @@ export class DrawHistogram {
         .raise();
     }
     }  
-    function findNestedMin(data) {
+    function findNestedMin(data, maxValue = Number.MAX_SAFE_INTEGER) {
         let min = Infinity;
         for (const item of data) {
-          if (Array.isArray(item)) {
-            min = Math.min(min, findNestedMin(item));
-          } else {
-            min = Math.min(min, item);
-          }
+            if (Array.isArray(item)) {
+                min = Math.min(min, findNestedMin(item, maxValue));
+            } else if (item < maxValue) { 
+                min = Math.min(min, item);
+            }
         }
         return min;
-      }
-      function findNestedMax(data) {
-        let max = Infinity;
+    }
+    
+    function findNestedMax(data, minValue = Number.MIN_SAFE_INTEGER) {
+        let max = -Infinity; 
         for (const item of data) {
-          if (Array.isArray(item)) {
-            max = Math.max(max, findNestedMin(item));
-          } else {
-            max = Math.max(max, item);
-          }
+            if (Array.isArray(item)) {
+                max = Math.max(max, findNestedMax(item, minValue));
+            } else if (item > minValue) { 
+                max = Math.max(max, item);
+            }
         }
         return max;
-      }
+    }
     
 
