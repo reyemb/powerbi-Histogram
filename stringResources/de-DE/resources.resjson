@@ -1,4 +1,10 @@
 {
+      "UseColorJsonKey": "JSON zum Färben nutzen",
+  "UseColorJsonDescriptionKey": "Mit Hilfe eines JSON-ColorCodes, welches jedem Event einen HEX-Farbcode zuordnet kann die Visualisierung beeinflusst werden",
+  "ColorJsonKey": "JSON zum Einfärben",
+  "ColorJsonDescriptionKey": "Mit Hilfe eines JSON-ColorCodes, welches jedem Event einen HEX-Farbcode zuordnet kann die Visualisierung beeinflusst werden",
+  "colorKey": "Farbcode angeben",
+  "colorDescriptionKey": "Mit Farbcode Events einfärben",
     "FontSizeKey": "Schriftgröße",
     "FontSizeDescriptionKey": "Definiert die Schriftgröße der Visualisierung.",
     "TextColorKey": "Textfarbe",

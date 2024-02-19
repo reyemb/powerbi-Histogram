@@ -1,4 +1,10 @@
 {
+      "UseColorJsonKey": "Use JSON for Coloring",
+  "UseColorJsonDescriptionKey": "With the help of a JSON color code, each event can be assigned a HEX color code to influence the visualization",
+  "ColorJsonKey": "Coloring JSON",
+  "ColorJsonDescriptionKey": "With the help of a JSON color code, each event can be assigned a HEX color code to influence the visualization",
+  "colorKey": "Specify color code",
+  "colorDescriptionKey": "Color events using a color code",
     "FontSizeKey": "Font Size",
     "FontSizeDescriptionKey": "Defines the font size of the visual.",
     "TextColorKey": "Text Color",

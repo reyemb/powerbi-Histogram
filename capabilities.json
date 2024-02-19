@@ -13,7 +13,7 @@
   "dataRoles": [
     {
       "name": "Values",
-      "kind": "Grouping",
+      "kind": "GroupingOrMeasure",
       "displayName": "Values",
       "displayNameKey": "Visual_Values"
     },
@@ -58,6 +58,12 @@
         }
       }
     },
+    "color": {
+      "properties": {
+          "useColorJson": {"type": {"bool": true}},
+          "colorJson": {"type": {"text": true}}
+      }
+  },
     "bins": {
       "displayName": "Bins",
       "properties": {

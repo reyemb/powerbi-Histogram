@@ -33,6 +33,28 @@ import { formattingSettings } from "powerbi-visuals-utils-formattingmodel-commun
  * Histogram Visual Settings
  */
 
+export class ColorSettings extends formattingSettings.SimpleCard {
+    public useColorJson = new formattingSettings.ToggleSwitch({
+        name: "useColorJson",
+        displayNameKey: "UseColorJsonKey",
+        descriptionKey: "UseColorJsonDescriptionKey",
+        value: false,
+    });
+    public colorJson = new formattingSettings.TextInput({  
+        name: "colorJson",
+        displayNameKey: "ColorJsonKey",
+        descriptionKey: "ColorJsonDescriptionKey",
+        value: "",
+        placeholder: "{ \"event1\": \"#ff0000\", \"event2\": \"#00ff00\", \"event3\": \"#0000ff\"}}",
+    });
+
+    topLevelSlice?: formattingSettings.SimpleSlice<any> = this.useColorJson;
+    name: string = "color";
+    displayNameKey: string = "colorKey";
+    descriptionKey: string = "colorDescriptionKey";
+    slices: Array<formattingSettings.Slice> = [this.useColorJson, this.colorJson];
+}
+
 export class GeneralSettings extends formattingSettings.SimpleCard {
     public fontSize = new formattingSettings.NumUpDown({
         name: "fontSize",
@@ -322,12 +344,14 @@ export class StatsSettings extends formattingSettings.CompositeCard {
 export class VisualFormattingSettingsModel extends formattingSettings.Model {
     displayNameKey: string = "FormattingKey";
     discriptionKey: string = "FormattingDescriptionKey";
+    public colorSettings: ColorSettings = new ColorSettings();
     public generalSettings: GeneralSettings = new GeneralSettings();
     public marginSettings: MarginSettings = new MarginSettings();
     public statsSettings: StatsSettings = new StatsSettings();
     public binSettings: BinSettings = new BinSettings();
 
     public cards = [
+        this.colorSettings,
         this.generalSettings,
         this.marginSettings,
         this.statsSettings,

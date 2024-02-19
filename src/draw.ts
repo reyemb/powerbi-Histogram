@@ -46,11 +46,10 @@ export class DrawHistogram {
             .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
     }
 
-    createAxes(data: number[]): void {   
+    createAxes(data: any): void {   
         this.x = d3.scaleLinear()
-            .domain([Math.min(...data), Math.max(...data)])
+            .domain([findNestedMin(data), findNestedMax(data)])
             .range([0, this.width]);
-        
         this.svg.append("g")
             .attr("transform", `translate(0, ${this.height})`)
             .call(d3.axisBottom(this.x).tickFormat(d => this.formatterFloat(Number(d))))
@@ -91,15 +90,27 @@ export class DrawHistogram {
             .attr("height", (d) => `${this.height - this.y(d.datapoints.length)}`)
             .style("fill", binColor);        
     }
-    drawVerticalLines(verticalFieldIndexes: number[], data): void {
+    drawVerticalLines(verticalFieldIndexes: number[], data, columns, jsoncolor, useColorJson): void {
         for (let index of verticalFieldIndexes) {
-            const value = data[0][index];
-            // Add constant color and line width
-            const color = "red";
-            const lineWidth = "4px"
-            this.drawLine(value, color, lineWidth);
+          const value = data[0][index];
+          let color;
+          
+          if (useColorJson) {
+            // Only parse JSON if needed
+            const colorjson = JSON.parse(jsoncolor); 
+            color = colorjson[columns[index].displayName] ? colorjson[columns[index].displayName] : "red";
+
+          } else {
+            color = "red";
+          }
+      
+          const lineWidth = "4px"; 
+      
+          // Consider adding validation for value and color here if needed
+      
+          this.drawLine(value, color, lineWidth); 
         }
-    }
+      }
     
     /**
      * Draws a vertical line on the SVG.
@@ -122,5 +133,27 @@ export class DrawHistogram {
         .raise();
     }
     }  
+    function findNestedMin(data) {
+        let min = Infinity;
+        for (const item of data) {
+          if (Array.isArray(item)) {
+            min = Math.min(min, findNestedMin(item));
+          } else {
+            min = Math.min(min, item);
+          }
+        }
+        return min;
+      }
+      function findNestedMax(data) {
+        let max = Infinity;
+        for (const item of data) {
+          if (Array.isArray(item)) {
+            max = Math.max(max, findNestedMin(item));
+          } else {
+            max = Math.max(max, item);
+          }
+        }
+        return max;
+      }
     
 

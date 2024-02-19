@@ -74,10 +74,8 @@ export class Visual implements IVisual {
         // Prepare the data
         const preparedData: PreparedData = prepareData(options, this.host);
         const { data, datapoints } = preparedData;
-
         this.drawHistogram.init(options, this.formattingSettings, this.formatterFloat, this.formatterInt);            
-        this.drawHistogram.createAxes(data);
-        
+        this.drawHistogram.createAxes(options.dataViews[0].table.rows);
         
 
         const binColor = this.formattingSettings.binSettings.binColour.value.value;
@@ -89,10 +87,9 @@ export class Visual implements IVisual {
         } else {
             this.drawHistogram.createHistogram(datapoints, this.formattingSettings.binSettings.binCount.value, binColor);
         }
-
         const stats = calculateStats(data);     
         const verticalFieldIndexes = options.dataViews[0].table.columns.map((column, index) => column.roles['VerticalLines'] ? index : -1).filter(index => index !== -1);
-        this.drawHistogram.drawVerticalLines(verticalFieldIndexes, options.dataViews[0].table.rows);
+        this.drawHistogram.drawVerticalLines(verticalFieldIndexes, options.dataViews[0].table.rows, options.dataViews[0].table.columns, this.formattingSettings.colorSettings.colorJson.value, this.formattingSettings.colorSettings.useColorJson.value);
 
         addLegend(stats, this.formattingSettings.statsSettings, this.drawHistogram.width, this.formatterFloat, this.drawHistogram.svg);
         drawStatLines(stats, this.formattingSettings.statsSettings, this.drawHistogram);    
